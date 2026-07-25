@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Jogador {
+  id       String       @id @default(uuid())
+  nome     String
+  email    String    @unique
+  telefone String
+  reservas Reserva[] 
+
+  @@map("jogadores")
+}
+
+model Quadra {
+  id          String       @id @default(uuid())
+  nome        String
+  modalidade  String
+  localizacao String
+  reservas    Reserva[]
+
+  @@map("quadras")
+}
+
+model Reserva {
+  id             String      @id @default(uuid())
+  jogador_id     String
+  quadra_id      String
+  data           DateTime @db.Date
+  horario_inicio DateTime @db.Time
+  horario_fim    DateTime @db.Time
+  jogador        Jogador  @relation(fields: [jogador_id], references: [id])
+  quadra         Quadra   @relation(fields: [quadra_id], references: [id])
+
+  @@map("reservas")
+}
