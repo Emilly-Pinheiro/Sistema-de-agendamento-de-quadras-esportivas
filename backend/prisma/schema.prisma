@@ -41,3 +41,11 @@ model Reserva {
 
   @@map("reservas")
 }
+
+model Usuario {
+  id    String @id @default(uuid())
+  nome  String
+  email String @unique
+  senha String
+  @@map("usuarios")
+}
