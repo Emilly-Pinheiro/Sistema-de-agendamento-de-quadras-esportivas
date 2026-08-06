@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Nosso banco de dados PostgreSQL está hospedado na nuvem usando o Supabase. Para rodar o projeto localmente e conectar ao banco, siga os passos abaixo:",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,7 @@
   "type": "commonjs",
   "dependencies": {
     "@prisma/adapter-pg": "^7.9.0",
-    "@prisma/client": "^7.9.0",
+    "@prisma/client": "^7.9.1",
     "bcrypt": "^6.0.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
@@ -20,6 +20,6 @@
     "pg": "^8.22.0"
   },
   "devDependencies": {
-    "prisma": "^7.9.0"
+    "prisma": "^7.9.1"
   }
 }
