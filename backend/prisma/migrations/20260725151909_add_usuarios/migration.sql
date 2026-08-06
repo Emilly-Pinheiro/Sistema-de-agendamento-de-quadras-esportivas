@@ -3,6 +3,7 @@ CREATE TABLE "usuarios" (
     "id" TEXT NOT NULL,
     "nome" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "telefone" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
 
     CONSTRAINT "usuarios_pkey" PRIMARY KEY ("id")

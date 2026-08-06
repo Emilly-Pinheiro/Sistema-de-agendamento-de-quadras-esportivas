@@ -10,8 +10,8 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 const criarUsuario = async (dados) => {
-    if (!dados.nome || !dados.email || !dados.senha) {
-        throw new Error("Nome, email e senha são obrigatórios.");
+    if (!dados.nome || !dados.email || !dados.senha || !dados.telefone) {
+        throw new Error("Nome, email, senha e telefone são obrigatórios.");
     }
 
     const usuarioExistente = await prisma.usuario.findUnique({ where: { email: dados.email } });
@@ -26,6 +26,7 @@ const criarUsuario = async (dados) => {
             id: crypto.randomUUID(),
             nome: dados.nome,
             email: dados.email,
+            telefone: dados.telefone,
             senha: senhaHash,
         },
     });

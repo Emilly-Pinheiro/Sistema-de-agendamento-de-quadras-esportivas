@@ -46,6 +46,7 @@ model Usuario {
   id    String @id @default(uuid())
   nome  String
   email String @unique
+  telefone String
   senha String
   @@map("usuarios")
 }
