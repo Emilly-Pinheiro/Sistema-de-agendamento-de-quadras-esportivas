@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 const reservaRoutes = require('./routes/reservaRoutes');
 const jogadorRoutes = require('./routes/jogadorRoutes');
@@ -7,6 +8,7 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use('/reservas', reservaRoutes);
