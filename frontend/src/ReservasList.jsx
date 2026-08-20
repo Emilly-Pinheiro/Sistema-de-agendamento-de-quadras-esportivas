@@ -83,7 +83,7 @@ export function ReservasList() {
                     <Button 
                         variant="contained" 
                         sx={{ 
-                            backgroundColor: '#5e2a84', 
+                            backgroundColor: '#5D2D6F', 
                             borderRadius: 50, 
                             textTransform: 'none',
                             px: 4,
@@ -102,7 +102,7 @@ export function ReservasList() {
                     {reservasFiltradas.map(reserva => (
                         <Grid item key={reserva.id} xs={12} sm={6} md={4}>
                             <Card sx={{ 
-                                border: '2px solid #5e2a84', 
+                                border: '2px solid #5D2D6F', 
                                 borderRadius: 3, 
                                 position: 'relative', 
                                 height: '100%', 
@@ -117,7 +117,7 @@ export function ReservasList() {
                                         position: 'absolute', 
                                         top: -20, 
                                         right: -20, 
-                                        backgroundColor: '#5e2a84', 
+                                        backgroundColor: '#5D2D6F', 
                                         color: 'white', 
                                         width: 45,
                                         height: 45,

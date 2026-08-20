@@ -61,6 +61,12 @@ const atualizarReserva = async (id, dadosReserva) => {
     });
 };
 
+const buscarPorId = async (id) => {
+    return await prisma.reserva.findUnique({
+        where: { id: id }
+    });
+};
+
 const deletarReserva = async (id) => {
     return await prisma.reserva.delete({
         where: { id: id }
@@ -71,5 +77,6 @@ module.exports = {
     criarReserva,
     listarReservas,
     atualizarReserva,
-    deletarReserva
+    deletarReserva,
+    buscarPorId
 };

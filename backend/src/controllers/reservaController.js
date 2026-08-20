@@ -21,6 +21,23 @@ const listar = async (req, res) => {
     }
 };
 
+const buscarPorId = async (req, res) => {
+    try {
+        const { id } = req.params;
+       
+        const reserva = await reservaService.buscarPorId(id);
+        
+        if (!reserva) {
+            return res.status(404).json({ error: "Reserva não encontrada" });
+        }
+        
+        res.json(reserva);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Erro ao buscar a reserva" });
+    }
+};
+
 const atualizar = async (req, res) => {
     try {
         const { id } = req.params;
@@ -44,6 +61,7 @@ const deletar = async (req, res) => {
 module.exports = {
     criar,
     listar,
+    buscarPorId,
     atualizar,
     deletar
 };

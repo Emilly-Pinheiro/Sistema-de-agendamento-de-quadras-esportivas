@@ -9,9 +9,8 @@ export function Header() {
             alignItems: 'center',
             justifyContent: 'space-between',
             px: 4,
-            py: 2,
-            borderTop: '2px solid #0288d1', 
-            borderBottom: '2px solid #0288d1', 
+            py: 2, 
+            borderBottom: '2px solid #5D2D6F', 
             backgroundColor: 'white',
             width: '100%',
             boxSizing: 'border-box'
