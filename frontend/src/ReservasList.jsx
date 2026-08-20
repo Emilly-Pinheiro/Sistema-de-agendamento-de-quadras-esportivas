@@ -2,6 +2,7 @@ import { Box, Button, Card, CardContent, Grid, IconButton, TextField, Typography
 import EditIcon from "@mui/icons-material/Edit";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -11,6 +12,7 @@ export function ReservasList() {
     const [reservas, setReservas] = useState([]);
     const [search, setSearch] = useState("");
     const navigate = useNavigate();
+    const [reservaParaCancelar, setReservaParaCancelar] = useState(null);
 
     const buscarReservas = async () => {
         try {
@@ -25,14 +27,13 @@ export function ReservasList() {
         buscarReservas();
     }, []);
 
-    const handleDelete = async (id) => {
-        if (window.confirm("Deseja realmente cancelar este agendamento?")) {
-            try {
-                await axios.delete(`http://localhost:3000/reservas/${id}`);
-                buscarReservas(); 
-            } catch (error) {
-                console.error("Erro ao cancelar agendamento", error);
-            }
+    const confirmarCancelamento = async (id) => {
+        try {
+            await axios.delete(`http://localhost:3000/reservas/${id}`);
+            setReservaParaCancelar(null);
+            buscarReservas();
+        } catch (error) {
+            console.error("Erro ao cancelar agendamento", error);
         }
     };
 
@@ -130,14 +131,14 @@ export function ReservasList() {
 
                                 <CardContent sx={{ p: 4, display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
                                     <Typography variant="h6" fontWeight="bold" align="center" gutterBottom sx={{ fontFamily: 'serif', mb: 3 }}>
-                                        Quadra {reserva.quadra_id.substring(0,5)}
+                                        Quadra {reserva.quadra?.nome}
                                     </Typography>
                                 
                                     <Box sx={{ backgroundColor: '#e0e0e0', p: 1.5, borderRadius: 2, mb: 1.5 }}>
-                                        <Typography variant="body2"><strong>Data:</strong> {new Date(reserva.data).toLocaleDateString('pt-BR')}</Typography>
+                                        <Typography variant="body2"><strong>Data:</strong> {reserva.data.substring(0, 10).split('-').reverse().join('/')}</Typography>
                                     </Box>
                                     <Box sx={{ backgroundColor: '#e0e0e0', p: 1.5, borderRadius: 2, mb: 1.5 }}>
-                                        <Typography variant="body2"><strong>Responsável:</strong> {reserva.jogador_id.substring(0,5)}</Typography>
+                                        <Typography variant="body2"><strong>Responsável:</strong> {reserva.jogador?.nome}</Typography>
                                     </Box>
                                     <Box sx={{ backgroundColor: '#e0e0e0', p: 1.5, borderRadius: 2, mb: 1.5 }}>
                                         <Typography variant="body2"><strong>Horário de Entrada:</strong> {new Date(reserva.horario_inicio).toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})} h</Typography>
@@ -149,19 +150,68 @@ export function ReservasList() {
                                     <Button 
                                         variant="contained" 
                                         fullWidth 
-                                        sx={{ 
-                                            borderRadius: 50, 
-                                            textTransform: 'none', 
-                                            backgroundColor: '#b71c1c',
-                                            fontWeight: 'bold',
-                                            mt: 'auto', 
-                                            '&:hover': { backgroundColor: '#7f0000' }
-                                        }}
-                                        onClick={() => handleDelete(reserva.id)}
+                                        sx={{ borderRadius: 50, textTransform: 'none', backgroundColor: '#b71c1c', fontWeight: 'bold', mt: 'auto', '&:hover': { backgroundColor: '#7f0000' } }}
+                                        onClick={() => setReservaParaCancelar(reserva.id)}
                                     >
                                         Cancelar Agendamento
                                     </Button>
                                 </CardContent>
+                                {reservaParaCancelar === reserva.id && (
+                                    <Box sx={{
+                                        position: 'absolute',
+                                        top: '50%',
+                                        left: '50%',
+                                        transform: 'translate(-50%, -50%)',
+                                        backgroundColor: 'white',
+                                        border: '2px solid #5e2a84',
+                                        borderRadius: 2,
+                                        p: 3,
+                                        width: '95%',
+                                        boxShadow: '0px 8px 24px rgba(0,0,0,0.15)',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        zIndex: 10
+                                    }}>
+                                        <WarningAmberIcon sx={{ color: '#c62828', fontSize: 45, mb: 1 }} />
+                                        
+                                        <Typography textAlign="center" sx={{ mb: 3, fontSize: '1.1rem' }}>
+                                            Tem certeza de que deseja cancelar a reserva na <Box component="span" sx={{ color: '#c62828', fontWeight: 'bold' }}>Quadra {reserva.quadra_id.substring(0,5)}</Box>?
+                                        </Typography>
+
+                                        <Box sx={{ display: 'flex', gap: 2, width: '100%', justifyContent: 'center' }}>
+                                            <Button 
+                                                onClick={() => setReservaParaCancelar(null)}
+                                                sx={{ 
+                                                    backgroundColor: '#e0e0e0', 
+                                                    color: 'black', 
+                                                    borderRadius: 50, 
+                                                    px: 4, 
+                                                    textTransform: 'none', 
+                                                    fontWeight: 'bold',
+                                                    '&:hover': { backgroundColor: '#bdbdbd' } 
+                                                }}
+                                            >
+                                                Não
+                                            </Button>
+                                            <Button 
+                                                onClick={() => confirmarCancelamento(reserva.id)}
+                                                variant="outlined"
+                                                sx={{ 
+                                                    borderColor: 'black', 
+                                                    color: 'black', 
+                                                    borderRadius: 50, 
+                                                    px: 4, 
+                                                    textTransform: 'none', 
+                                                    fontWeight: 'bold',
+                                                    '&:hover': { backgroundColor: '#f5f5f5', borderColor: 'black' } 
+                                                }}
+                                            >
+                                                Sim
+                                            </Button>
+                                        </Box>
+                                    </Box>
+                                )}
                             </Card>
                         </Grid>
                     ))}

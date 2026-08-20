@@ -33,7 +33,7 @@ export function NovaReserva() {
                 setQuadras(resQuadras.data);
                 setJogadores(resJogadores.data);
             } catch (error) {
-                console.error("Erro ao carregar dados para o select", error);
+                console.error("Erro ao carregar dados", error);
             }
         };
         
