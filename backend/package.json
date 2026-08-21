@@ -4,6 +4,8 @@
   "description": "Nosso banco de dados PostgreSQL está hospedado na nuvem usando o Supabase. Para rodar o projeto localmente e conectar ao banco, siga os passos abaixo:",
   "main": "index.js",
   "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
