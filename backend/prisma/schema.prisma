@@ -2,8 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -21,11 +20,16 @@ model Jogador {
 }
 
 model Quadra {
-  id          String       @id @default(uuid())
-  nome        String
-  modalidade  String
-  localizacao String
-  reservas    Reserva[]
+  id         String   @id @default(uuid())
+  nome       String
+  modalidade String
+  cep        String
+  cidade     String
+  uf         String
+  rua        String
+  numero     String
+  imagens    String[]
+  reservas   Reserva[]
 
   @@map("quadras")
 }

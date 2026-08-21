@@ -13,7 +13,12 @@ CREATE TABLE "quadras" (
     "id" TEXT NOT NULL,
     "nome" TEXT NOT NULL,
     "modalidade" TEXT NOT NULL,
-    "localizacao" TEXT NOT NULL,
+    "cep" TEXT NOT NULL,
+    "cidade" TEXT NOT NULL,
+    "uf" TEXT NOT NULL,
+    "rua" TEXT NOT NULL,
+    "numero" TEXT NOT NULL,
+    "imagens" TEXT[],
 
     CONSTRAINT "quadras_pkey" PRIMARY KEY ("id")
 );
