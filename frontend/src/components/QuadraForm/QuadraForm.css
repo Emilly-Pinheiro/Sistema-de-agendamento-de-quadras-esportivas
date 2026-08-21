@@ -57,9 +57,9 @@
 }
 
 .quadra-form-upload {
-  position: relative;
   display: flex;
   align-items: center;
+  background: transparent;
   border: 1px dashed var(--color-border);
   border-radius: 6px;
   padding: 4px 10px;
@@ -69,13 +69,7 @@
 }
 
 .quadra-form-input-arquivo {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  border: 0;
-  opacity: 0;
-  overflow: hidden;
+  display: none;
 }
 
 .quadra-form-erro {

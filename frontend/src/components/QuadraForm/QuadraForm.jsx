@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { urlDaImagem } from '../../services/quadraService.js'
 import './QuadraForm.css'
 
@@ -18,6 +18,7 @@ function QuadraForm({ initialData, submitLabel, onSubmit, onCancel }) {
   const [novasImagens, setNovasImagens] = useState([])
   const [enviando, setEnviando] = useState(false)
   const [erro, setErro] = useState('')
+  const inputArquivoRef = useRef(null)
 
   function handleChange(event) {
     const { name, value } = event.target
@@ -113,16 +114,21 @@ function QuadraForm({ initialData, submitLabel, onSubmit, onCancel }) {
               </button>
             </span>
           ))}
-          <label className="quadra-form-upload">
+          <button
+            type="button"
+            className="quadra-form-upload"
+            onClick={() => inputArquivoRef.current?.click()}
+          >
             + Adicionar
-            <input
-              className="quadra-form-input-arquivo"
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={handleAdicionarImagens}
-            />
-          </label>
+          </button>
+          <input
+            ref={inputArquivoRef}
+            className="quadra-form-input-arquivo"
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleAdicionarImagens}
+          />
         </div>
       </div>
 
