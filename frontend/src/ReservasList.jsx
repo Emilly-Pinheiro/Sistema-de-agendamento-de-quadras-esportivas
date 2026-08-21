@@ -99,7 +99,7 @@ export function ReservasList() {
                     </Button>
                 </Box>
 
-                <Grid container spacing={4}>
+                <Grid container spacing={4} sx={{ justifyContent: 'center' }}>
                     {reservasFiltradas.map(reserva => (
                         <Grid item key={reserva.id} xs={12} sm={6} md={4}>
                             <Card sx={{ 
@@ -158,25 +158,25 @@ export function ReservasList() {
                                 </CardContent>
                                 {reservaParaCancelar === reserva.id && (
                                     <Box sx={{
-                                        position: 'absolute',
+                                        position: 'fixed',
                                         top: '50%',
                                         left: '50%',
                                         transform: 'translate(-50%, -50%)',
                                         backgroundColor: 'white',
                                         border: '2px solid #5e2a84',
                                         borderRadius: 2,
-                                        p: 3,
-                                        width: '95%',
+                                        p: 4, 
+                                        width: { xs: '90%', sm: '400px' },
                                         boxShadow: '0px 8px 24px rgba(0,0,0,0.15)',
                                         display: 'flex',
                                         flexDirection: 'column',
                                         alignItems: 'center',
-                                        zIndex: 10
+                                        zIndex: 9999
                                     }}>
                                         <WarningAmberIcon sx={{ color: '#c62828', fontSize: 45, mb: 1 }} />
                                         
                                         <Typography textAlign="center" sx={{ mb: 3, fontSize: '1.1rem' }}>
-                                            Tem certeza de que deseja cancelar a reserva na <Box component="span" sx={{ color: '#c62828', fontWeight: 'bold' }}>Quadra {reserva.quadra_id.substring(0,5)}</Box>?
+                                            Tem certeza de que deseja cancelar a reserva na <Box component="span" sx={{ color: '#c62828', fontWeight: 'bold' }}>{reserva.quadra?.nome}</Box>?
                                         </Typography>
 
                                         <Box sx={{ display: 'flex', gap: 2, width: '100%', justifyContent: 'center' }}>
