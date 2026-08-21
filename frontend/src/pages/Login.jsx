@@ -24,7 +24,7 @@ function Login() {
     try {
       const { dados } = await login(form);
       localStorage.setItem('token', dados.token);
-      navigate('/reservas');
+      navigate('/dashboard');
     } catch (err) {
       setErro(err.message);
     } finally {
