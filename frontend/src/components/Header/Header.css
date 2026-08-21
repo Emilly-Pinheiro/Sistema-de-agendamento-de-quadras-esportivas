@@ -1,0 +1,28 @@
+.header {
+  background: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 3px solid var(--color-accent);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.header-logo {
+  font-size: 20px;
+}
+
+.header-title {
+  font-weight: 700;
+}
+
+.header-user {
+  font-size: 20px;
+}

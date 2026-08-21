@@ -1,0 +1,90 @@
+.quadra-form {
+  background: #dcd0e0;
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.quadra-form-linha {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.quadra-form-linha .form-field {
+  flex: 1;
+}
+
+.form-field-uf,
+.form-field-numero {
+  flex: 0 0 70px;
+}
+
+.quadra-form-imagens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: var(--color-white);
+  border-radius: 6px;
+  padding: 12px;
+  min-height: 80px;
+}
+
+.quadra-form-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-bg);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.quadra-form-chip img {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.quadra-form-chip button {
+  border: none;
+  background: transparent;
+  color: var(--color-danger);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.quadra-form-upload {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px dashed var(--color-border);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--color-muted);
+}
+
+.quadra-form-input-arquivo {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.quadra-form-erro {
+  color: var(--color-danger);
+  font-size: 13px;
+}
+
+.quadra-form-acoes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
