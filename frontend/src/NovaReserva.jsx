@@ -1,4 +1,4 @@
-import { Box, Button, Container, MenuItem, Select, TextField, Typography, FormControl } from "@mui/material";
+import { Alert, Box, Button, Container, MenuItem, Select, TextField, Typography, FormControl } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "./components/Header";
@@ -17,6 +17,7 @@ export function NovaReserva() {
 
     const [quadras, setQuadras] = useState([]);
     const [jogadores, setJogadores] = useState([]);
+    const [erro, setErro] = useState("");
 
     const horariosDisponiveis = [
         "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", 
@@ -41,6 +42,13 @@ export function NovaReserva() {
     }, []);
 
     const handleSubmit = async () => {
+        if (!form.quadra_id || !form.jogador_id || !form.data || !form.horario_inicio || !form.horario_fim) {
+            setErro("Preencha a quadra, o jogador, a data e os horários da reserva.");
+            return;
+        }
+
+        setErro("");
+
         try {
             const dadosParaEnviar = {
                 quadra_id: form.quadra_id,
@@ -54,6 +62,7 @@ export function NovaReserva() {
             navigate("/reservas");
         } catch (error) {
             console.error("Erro ao salvar reserva", error);
+            setErro("Não foi possível salvar a reserva. Tente novamente.");
         }
     };
 
@@ -76,6 +85,7 @@ export function NovaReserva() {
                     flexDirection: 'column',
                     gap: 3
                 }}>
+                    {erro && <Alert severity="error">{erro}</Alert>}
                     
                     <FormControl fullWidth sx={{ backgroundColor: 'white', borderRadius: 1 }}>
                         <Select
@@ -107,42 +117,54 @@ export function NovaReserva() {
                         </Select>
                     </FormControl>
 
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
+                    <Box sx={{
+                        display: 'grid',
+                        gridTemplateColumns: { xs: '1fr', sm: 'minmax(0, 0.8fr) minmax(0, 1.1fr) minmax(0, 1.1fr)' },
+                        alignItems: 'center',
+                        gap: 2
+                    }}>
                         <TextField 
                             type="date" 
                             size="small"
-                            sx={{ backgroundColor: 'white', borderRadius: 1, flexGrow: 1 }}
+                            fullWidth
+                            sx={{ backgroundColor: 'white', borderRadius: 1 }}
                             value={form.data}
                             onChange={(e) => setForm({...form, data: e.target.value})}
                         />
-                        
-                        <Typography sx={{ color: '#333' }}>Entrada:</Typography>
-                        <Select 
-                            size="small" 
-                            displayEmpty 
-                            value={form.horario_inicio}
-                            sx={{ backgroundColor: 'white', borderRadius: 1, minWidth: 100 }}
-                            onChange={(e) => setForm({...form, horario_inicio: e.target.value})}
-                        >
-                            <MenuItem value="" disabled>00:00 h</MenuItem>
-                            {horariosDisponiveis.map(hora => (
-                                <MenuItem key={hora} value={hora}>{hora} h</MenuItem>
-                            ))}
-                        </Select>
 
-                        <Typography sx={{ color: '#333' }}>Saída:</Typography>
-                        <Select 
-                            size="small" 
-                            displayEmpty 
-                            value={form.horario_fim}
-                            sx={{ backgroundColor: 'white', borderRadius: 1, minWidth: 100 }}
-                            onChange={(e) => setForm({...form, horario_fim: e.target.value})}
-                        >
-                            <MenuItem value="" disabled>00:00 h</MenuItem>
-                            {horariosDisponiveis.map(hora => (
-                                <MenuItem key={hora} value={hora}>{hora} h</MenuItem>
-                            ))}
-                        </Select>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <Typography sx={{ color: '#333', whiteSpace: 'nowrap' }}>Entrada:</Typography>
+                            <Select 
+                                size="small" 
+                                displayEmpty 
+                                value={form.horario_inicio}
+                                fullWidth
+                                sx={{ backgroundColor: 'white', borderRadius: 1, minWidth: 100 }}
+                                onChange={(e) => setForm({...form, horario_inicio: e.target.value})}
+                            >
+                                <MenuItem value="" disabled>00:00 h</MenuItem>
+                                {horariosDisponiveis.map(hora => (
+                                    <MenuItem key={hora} value={hora}>{hora} h</MenuItem>
+                                ))}
+                            </Select>
+                        </Box>
+
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <Typography sx={{ color: '#333', whiteSpace: 'nowrap' }}>Saída:</Typography>
+                            <Select 
+                                size="small" 
+                                displayEmpty 
+                                value={form.horario_fim}
+                                fullWidth
+                                sx={{ backgroundColor: 'white', borderRadius: 1, minWidth: 100 }}
+                                onChange={(e) => setForm({...form, horario_fim: e.target.value})}
+                            >
+                                <MenuItem value="" disabled>00:00 h</MenuItem>
+                                {horariosDisponiveis.map(hora => (
+                                    <MenuItem key={hora} value={hora}>{hora} h</MenuItem>
+                                ))}
+                            </Select>
+                        </Box>
                     </Box>
 
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2, px: 2 }}>
