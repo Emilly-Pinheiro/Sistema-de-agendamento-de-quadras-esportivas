@@ -7,6 +7,9 @@ import { ReservasList } from '../ReservasList.jsx';
 import { NovaReserva } from '../NovaReserva.jsx';
 import { EditarReserva } from '../EditarReserva.jsx';
 import PlayersPage from '../pages/Players/PlayersPage.jsx';
+import { QuadrasList } from '../QuadrasList.jsx';
+import { NovaQuadra } from '../NovaQuadra.jsx';
+import { EditarQuadra } from '../EditarQuadra.jsx';
 
 function PlayersRoute() {
   const { pathname } = useLocation();
@@ -24,6 +27,9 @@ function AppRoutes() {
       <Route path="/nova-reserva" element={<NovaReserva />} />
       <Route path="/editar-reserva/:id" element={<EditarReserva />} />
       <Route path="/jogadores/*" element={<PlayersRoute />} />
+      <Route path="/quadras" element={<QuadrasList />} />
+      <Route path="/nova-quadra" element={<NovaQuadra />} />
+      <Route path="/editar-quadra/:id" element={<EditarQuadra />} />
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );

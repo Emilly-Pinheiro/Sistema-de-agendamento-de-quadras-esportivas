@@ -7,7 +7,7 @@ export default function HeroSection() {
         <h1 id="hero-title">Coloque seu corpo em movimento e supere seus próprios limites!</h1>
         <p>Agende um horário conosco e se desafie com seus amigos</p>
         <div className="hero-section__actions">
-          <Link className="button button--primary button--hero" to="/agendar">Agendar Horário</Link>
+          <Link className="button button--primary button--hero" to="/nova-reserva">Agendar Horário</Link>
         </div>
       </div>
     </section>

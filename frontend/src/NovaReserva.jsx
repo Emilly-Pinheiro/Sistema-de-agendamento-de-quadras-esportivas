@@ -51,7 +51,7 @@ export function NovaReserva() {
             };
 
             await axios.post("http://localhost:3000/reservas", dadosParaEnviar);
-            navigate("/");
+            navigate("/reservas");
         } catch (error) {
             console.error("Erro ao salvar reserva", error);
         }
@@ -148,7 +148,7 @@ export function NovaReserva() {
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2, px: 2 }}>
                         <Button 
                             variant="contained" 
-                            onClick={() => navigate("/")}
+                            onClick={() => navigate("/reservas")}
                             sx={{ backgroundColor: '#5D2D6F', borderRadius: 50, px: 5, textTransform: 'none', '&:hover': { backgroundColor: '#4a148c' } }}
                         >
                             Cancelar
