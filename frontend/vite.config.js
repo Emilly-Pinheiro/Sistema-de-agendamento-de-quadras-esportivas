@@ -7,6 +7,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/auth': 'http://localhost:3000',
+      '/jogadores': 'http://localhost:3000',
     },
   },
 });

@@ -1,6 +1,7 @@
 import { Box, Typography, IconButton } from "@mui/material";
 import logo from "../assets/logo.png"; 
 import PersonIcon from "@mui/icons-material/Person";
+import { Link } from "react-router-dom";
 
 export function Header() {
     return (
@@ -15,7 +16,7 @@ export function Header() {
             width: '100%',
             boxSizing: 'border-box'
         }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Box component={Link} to="/dashboard" sx={{ display: 'flex', alignItems: 'center', gap: 2, color: 'inherit', textDecoration: 'none' }}>
                 
                 <img 
                     src={logo} 
