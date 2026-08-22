@@ -67,7 +67,7 @@ export function EditarReserva() {
             };
 
             await axios.put(`http://localhost:3000/reservas/${id}`, dadosParaEnviar);
-            navigate("/"); 
+            navigate("/reservas"); 
         } catch (error) {
             console.error("Erro ao editar reserva", error);
         }
@@ -147,7 +147,7 @@ export function EditarReserva() {
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2, px: 2 }}>
                         <Button 
                             variant="contained" 
-                            onClick={() => navigate("/")}
+                            onClick={() => navigate("/reservas")}
                             sx={{ backgroundColor: '#5e2a84', borderRadius: 50, px: 5, textTransform: 'none', '&:hover': { backgroundColor: '#4a148c' } }}
                         >
                             Cancelar
